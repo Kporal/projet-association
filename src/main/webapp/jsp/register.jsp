@@ -12,42 +12,54 @@
 	<div class="container">
 		
 		<div class="well">
-			<form class="form-horizontal" role="form">
+			<form class="form-horizontal" role="form" method="POST" action="#">
 			
 				<legend>Nouvelle inscription</legend>
 				
 				<div class="form-group">
 					<label for="input-login" class="col-md-2 control-label">Identifiant</label>
+					<font color="red">*</font>
 					<div class="col-md-3">
-						<input type="text" name="login" id="input-login" class="form-control" placeholder="identifiant" title="identifiant">
+						<input type="text" name="login" id="input-login" class="form-control" placeholder="identifiant" title="identifiant" required autofocus>
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<label for="input-password" class="col-md-2 control-label">Mot de passe</label>
+					<font color="red">*</font>
 					<div class="col-md-3">
-						<input type="password" name="password" id="input-password" class="form-control" placeholder="mot de passe" title="mot de passse">
+						<input type="password" name="password" id="input-password" class="form-control" placeholder="mot de passe" title="mot de passse" required>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="input-passwordConfirm" class="col-md-2 control-label">Mot de passe (confirm)</label>
+					<font color="red">*</font>
+					<div class="col-md-3">
+						<input type="password" name="passwordConfirm" id="input-passwordConfirm" class="form-control" placeholder="mot de passe" title="mot de passse" required>
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<label for="input-firstName" class="col-md-2 control-label">Nom</label>
+					<font color="red">*</font>
 					<div class="col-md-3">
-						<input type="text" name="firstName" id="input-firstName" class="form-control" placeholder="nom" title="nom">
+						<input type="text" name="firstName" id="input-firstName" class="form-control" placeholder="nom" title="nom" required>
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<label for="input-lastName" class="col-md-2 control-label">Prénom</label>
+					<font color="red">*</font>
 					<div class="col-md-3">
-						<input type="text" name="lastName" id="input-lastName" class="form-control" placeholder="prénom" title="prénom">
+						<input type="text" name="lastName" id="input-lastName" class="form-control" placeholder="prénom" title="prénom" required>
 					</div>
 				</div>
 				
 				<div class="form-group">
-					<label for="input-adresse" class="col-md-2 control-label">Adresse</label>
+					<label for="input-address" class="col-md-2 control-label">Adresse</label>
 					<div class="col-md-3">
-						<input type="text" name="adresse" id="input-adresse" class="form-control" placeholder="adresse" title="adresse">
+						<input type="text" name="address" id="input-address" class="form-control" placeholder="adresse" title="adresse">
 					</div>
 				</div>
 				
@@ -77,6 +89,15 @@
 						</select>
 					</div>
 				</div>
+				
+				<div class="row">
+					<div class="col-md-3 col-md-offset-2">
+						<button type="button" class="btn btn-primary">S'enregistrer</button>
+						<a href="signin.jsp" class="btn btn-danger">Annulez</a>
+					</div>
+				</div>
+				
+				<span class="help-block"><font color="red">*</font> Champs obligatoire</span>
 				
 			</form>
 		</div><!-- /well -->
