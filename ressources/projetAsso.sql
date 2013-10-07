@@ -1,0 +1,47 @@
+	Create schema PASSO;
+	
+	CREATE TABLE PASSO.article (
+		id INT NOT NULL,
+		code VARCHAR(5) DEFAULT NULL,
+		nom VARCHAR(50) DEFAULT NULL,
+		prix DOUBLE DEFAULT NULL,
+		stock INT DEFAULT NULL,
+	PRIMARY KEY (id)
+	)
+	
+	
+	CREATE TABLE PASSO.commande (
+		user_id INT NOT NULL,
+		article_id INT NOT NULL,
+	PRIMARY KEY (user_id,article_id)
+	)
+
+	
+	CREATE TABLE PASSO.pays (
+		id INT NOT NULL,
+		nom VARCHAR(45),
+	PRIMARY KEY (id)
+	)
+	
+	
+	CREATE TABLE PASSO.utilisateur (
+		id INT NOT NULL,
+		login VARCHAR(30) DEFAULT NULL,
+		pass VARCHAR(20) DEFAULT NULL,
+		nom VARCHAR(40) DEFAULT NULL,
+		prenom VARCHAR(30) DEFAULT NULL,
+		adresse VARCHAR(100) DEFAULT NULL,
+		code_postal VARCHAR(5) DEFAULT NULL,
+		ville VARCHAR(30) DEFAULT NULL,
+		pays_id INT NOT NULL,
+	PRIMARY KEY (id)
+	)
+
+	ALTER TABLE PASSO.commande
+		ADD FOREIGN KEY (article_id) REFERENCES PASSO.article(ID)
+		
+	ALTER TABLE PASSO.commande
+		ADD FOREIGN KEY (user_id) REFERENCES PASSO.utilisateur(ID)
+
+	ALTER TABLE PASSO.utilisateur
+		ADD FOREIGN KEY (pays_id) REFERENCES PASSO.pays(ID)

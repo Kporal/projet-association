@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Telosys Database Repository --><root>
+<tableList generation="2013-10-07 10:39:48" name="projet-association" type="Apache Derby">
+<table catalog="" javaBean="Item" javaBeanConv="" javaBeanDAO="" javaBeanList="" name="ARTICLE" schema="PASSO">
+<column dbDefaultValue="" dbName="ID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INTEGER" inputType="number" javaDefaultValue="0" javaName="id" javaType="int" jdbcTypeCode="4" label="Id" notNull="false" selected="true"/>
+<column dbDefaultValue="NULL" dbName="CODE" dbNotNull="false" dbPosition="2" dbSize="5" dbTypeName="VARCHAR" inputType="text" javaName="code" javaType="java.lang.String" jdbcTypeCode="12" label="Code" maxLength="5" notNull="false" selected="true"/>
+<column dbDefaultValue="NULL" dbName="NOM" dbNotNull="false" dbPosition="3" dbSize="50" dbTypeName="VARCHAR" inputType="text" javaName="name" javaType="java.lang.String" jdbcTypeCode="12" label="Nom" maxLength="50" notNull="false" selected="true"/>
+<column dbDefaultValue="NULL" dbName="PRIX" dbNotNull="false" dbPosition="4" dbSize="52" dbTypeName="DOUBLE" inputType="number" javaName="price" javaType="java.lang.Double" jdbcTypeCode="8" label="Prix" notNull="false" selected="true"/>
+<column dbDefaultValue="NULL" dbName="STOCK" dbNotNull="false" dbPosition="5" dbSize="10" dbTypeName="INTEGER" inputType="number" javaName="stock" javaType="java.lang.Integer" jdbcTypeCode="4" label="Stock" notNull="false" selected="true"/>
+<link cardinality="ManyToMany" cascade="" fetch="DEFAULT" foreignKeyName="" id="LINK_JT_PASSO.COMMANDE_O" inverseSideOf="" javaName="listOfUser" javaType="java.util.List" joinTableName="COMMANDE" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="ARTICLE" targetEntity="User" targetTableName="UTILISATEUR" used="true">
+<joinTable name="COMMANDE">
+<joinColumns>
+<joinColumn insertable="false" name="ARTICLE_ID" nullable="true" referencedColumnName="ID" unique="false" updatable="false"/>
+</joinColumns>
+<inverseJoinColumns>
+<joinColumn insertable="false" name="USER_ID" nullable="true" referencedColumnName="ID" unique="false" updatable="false"/>
+</inverseJoinColumns>
+</joinTable>
+</link>
+</table>
+<table catalog="" javaBean="Order" javaBeanConv="" javaBeanDAO="" javaBeanList="" name="COMMANDE" schema="PASSO">
+<column dbDefaultValue="" dbForeignKey="true" dbName="USER_ID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INTEGER" inputType="number" javaDefaultValue="0" javaName="userId" javaType="int" jdbcTypeCode="4" label="User Id" notNull="false" selected="true"/>
+<column dbDefaultValue="" dbForeignKey="true" dbName="ARTICLE_ID" dbNotNull="true" dbPosition="2" dbPrimaryKey="true" dbSize="10" dbTypeName="INTEGER" inputType="number" javaDefaultValue="0" javaName="articleId" javaType="int" jdbcTypeCode="4" label="Article Id" notNull="false" selected="true"/>
+<fk name="SQL131007101601560">
+<fkcol colname="ARTICLE_ID" colref="ID" deferrable="7" deleterule="3" sequence="1" tablename="COMMANDE" tableref="ARTICLE" updaterule="3"/>
+</fk>
+<fk name="SQL131007101751500">
+<fkcol colname="USER_ID" colref="ID" deferrable="7" deleterule="3" sequence="1" tablename="COMMANDE" tableref="UTILISATEUR" updaterule="3"/>
+</fk>
+</table>
+<table catalog="" javaBean="Country" javaBeanConv="" javaBeanDAO="" javaBeanList="" name="PAYS" schema="PASSO">
+<column dbDefaultValue="" dbName="ID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INTEGER" inputType="number" javaDefaultValue="0" javaName="id" javaType="int" jdbcTypeCode="4" label="Id" notNull="false" selected="true"/>
+<column dbDefaultValue="" dbName="NOM" dbNotNull="false" dbPosition="2" dbSize="45" dbTypeName="VARCHAR" inputType="text" javaName="name" javaType="java.lang.String" jdbcTypeCode="12" label="Nom" maxLength="45" notNull="false" selected="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="SQL131007101930860" id="LINK_FK_SQL131007101930860_I" inverseSideOf="LINK_FK_SQL131007101930860_O" javaName="listOfUser" javaType="java.util.List" joinTableName="" mappedBy="country" optional="UNDEFINED" owningSide="false" sourceTableName="PAYS" targetEntity="User" targetTableName="UTILISATEUR" used="true"/>
+</table>
+<table catalog="" javaBean="User" javaBeanConv="" javaBeanDAO="" javaBeanList="" name="UTILISATEUR" schema="PASSO">
+<column dbDefaultValue="" dbName="ID" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="INTEGER" inputType="number" javaDefaultValue="0" javaName="id" javaType="int" jdbcTypeCode="4" label="Id" notNull="false" selected="true"/>
+<column dbDefaultValue="NULL" dbName="LOGIN" dbNotNull="false" dbPosition="2" dbSize="30" dbTypeName="VARCHAR" inputType="text" javaName="login" javaType="java.lang.String" jdbcTypeCode="12" label="Login" maxLength="30" notNull="false" selected="true"/>
+<column dbDefaultValue="NULL" dbName="PASS" dbNotNull="false" dbPosition="3" dbSize="20" dbTypeName="VARCHAR" inputType="text" javaName="password" javaType="java.lang.String" jdbcTypeCode="12" label="Pass" maxLength="20" notNull="false" selected="true"/>
+<column dbDefaultValue="NULL" dbName="NOM" dbNotNull="false" dbPosition="4" dbSize="40" dbTypeName="VARCHAR" inputType="text" javaName="lastName" javaType="java.lang.String" jdbcTypeCode="12" label="Nom" maxLength="40" notNull="false" selected="true"/>
+<column dbDefaultValue="NULL" dbName="PRENOM" dbNotNull="false" dbPosition="5" dbSize="30" dbTypeName="VARCHAR" inputType="text" javaName="firstName" javaType="java.lang.String" jdbcTypeCode="12" label="Prenom" maxLength="30" notNull="false" selected="true"/>
+<column dbDefaultValue="NULL" dbName="ADRESSE" dbNotNull="false" dbPosition="6" dbSize="100" dbTypeName="VARCHAR" inputType="text" javaName="address" javaType="java.lang.String" jdbcTypeCode="12" label="Adresse" maxLength="100" notNull="false" selected="true"/>
+<column dbDefaultValue="NULL" dbName="CODE_POSTAL" dbNotNull="false" dbPosition="7" dbSize="5" dbTypeName="VARCHAR" inputType="text" javaName="zipCode" javaType="java.lang.String" jdbcTypeCode="12" label="Code Postal" maxLength="5" notNull="false" selected="true"/>
+<column dbDefaultValue="NULL" dbName="VILLE" dbNotNull="false" dbPosition="8" dbSize="30" dbTypeName="VARCHAR" inputType="text" javaName="city" javaType="java.lang.String" jdbcTypeCode="12" label="Ville" maxLength="30" notNull="false" selected="true"/>
+<column dbDefaultValue="" dbForeignKey="true" dbName="PAYS_ID" dbNotNull="true" dbPosition="9" dbSize="10" dbTypeName="INTEGER" inputType="number" javaDefaultValue="0" javaName="countryId" javaType="int" jdbcTypeCode="4" label="Pays Id" notNull="false" selected="true"/>
+<fk name="SQL131007101930860">
+<fkcol colname="PAYS_ID" colref="ID" deferrable="7" deleterule="3" sequence="1" tablename="UTILISATEUR" tableref="PAYS" updaterule="3"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="SQL131007101930860" id="LINK_FK_SQL131007101930860_O" inverseSideOf="" javaName="country" javaType="Country" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="UTILISATEUR" targetEntity="Country" targetTableName="PAYS" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="PAYS_ID" nullable="true" referencedColumnName="ID" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="ManyToMany" cascade="" fetch="DEFAULT" foreignKeyName="" id="LINK_JT_PASSO.COMMANDE_I" inverseSideOf="LINK_JT_PASSO.COMMANDE_O" javaName="listOfItem" javaType="java.util.List" joinTableName="COMMANDE" mappedBy="listOfUser" optional="UNDEFINED" owningSide="false" sourceTableName="UTILISATEUR" targetEntity="Item" targetTableName="ARTICLE" used="true"/>
+</table>
+</tableList>
+</root>
