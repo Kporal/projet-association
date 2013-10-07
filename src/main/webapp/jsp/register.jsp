@@ -4,7 +4,7 @@
 <html lang="fr">
   <head>
     <title>Inscription</title>
-    <jsp:include page="template/header.jsp" flush="true" />
+    <jsp:include page="template/header.jspf" flush="true" />
   </head>
   <body>
   
@@ -82,6 +82,6 @@
 		</div><!-- /well -->
 	</div><!-- /container -->
 
-	<jsp:include page="template/footer.jsp" flush="true" />
+	<jsp:include page="template/footer.jspf" flush="true" />
 </body>
 </html>

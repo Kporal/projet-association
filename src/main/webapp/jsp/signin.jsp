@@ -3,10 +3,10 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    <title>Index</title>
+    <title>Connexion</title>
+    <jsp:include page="template/header.jspf" flush="true"/>
     <!-- Style -->
     <link href="../ressources/css/signin.css" rel="stylesheet" media="screen">
-    <jsp:include page="template/header.jsp" flush="true" />
   </head>
   <body>
   
@@ -21,6 +21,6 @@
 
     </div> <!-- /container -->
 
-    <jsp:include page="template/footer.jsp" flush="true" />
+    <jsp:include page="template/footer.jspf" flush="true" />
   </body>
 </html>
