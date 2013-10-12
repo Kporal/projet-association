@@ -95,7 +95,7 @@
 				<div class="row">
 					<div class="col-md-3 col-md-offset-2">
 						<button type="button" class="btn btn-primary">S'enregistrer</button>
-						<a href="signin.jsp" class="btn btn-danger">Annulez</a>
+						<a href="signin.jsp" class="btn btn-danger">Annuler</a>
 					</div>
 				</div>
 				

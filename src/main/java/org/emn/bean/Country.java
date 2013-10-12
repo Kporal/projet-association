@@ -31,12 +31,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "PAYS", schema = "PASSO")
 // Define named queries here
-// @NamedQueries ( {
-// @NamedQuery ( name="Country.query1", query="SELECT x FROM Country x WHERE  "
-// ),
-// @NamedQuery ( name="Country.query2", query="SELECT x FROM Country x WHERE  "
-// )
-// } )
+@NamedQueries ({
+	@NamedQuery ( name="Country.findAll", query="SELECT x FROM Country x")
+})
 public class Country implements Serializable {
 	private static final long serialVersionUID = 1L;
 
