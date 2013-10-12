@@ -33,10 +33,11 @@
 				</div>
 				
 				<div class="form-group">
-					<label for="input-passwordConfirm" class="col-md-2 control-label">Mot de passe (confirm)</label>
+					<label for="input-passwordConfirm" class="col-md-2 control-label">Mot de passe</label>
 					<font color="red">*</font>
 					<div class="col-md-3">
 						<input type="password" name="passwordConfirm" id="input-passwordConfirm" class="form-control" placeholder="mot de passe" title="mot de passse" required>
+						<span class="help-block">Confirmation du mot de passe</span>
 					</div>
 				</div>
 				
@@ -60,6 +61,7 @@
 					<label for="input-address" class="col-md-2 control-label">Adresse</label>
 					<div class="col-md-3">
 						<input type="text" name="address" id="input-address" class="form-control" placeholder="adresse" title="adresse">
+						<span class="help-block">La rue du lieu de résidence</span>
 					</div>
 				</div>
 				
