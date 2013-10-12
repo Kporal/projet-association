@@ -12,7 +12,9 @@
     </style>
   </head>
   <body>
-  
+  	
+  	<jsp:include page="template/navbar.jspf"></jsp:include>
+  	
 	<br>
 	<div class="container">
 		<div class="well">

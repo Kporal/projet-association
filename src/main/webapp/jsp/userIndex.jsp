@@ -14,8 +14,8 @@
   <h2>Bienvenue sur Bazaar, le site des adhérents de l'association.</h2>
   <p>
 	  <ul>
-		  <li> <a href="#">Consulter la liste des articles disponibles</a></li>
-		  <li> <a href="#">Consulter votre commande</a></li>
+		  <li> <a href="items.jsp">Consulter la liste des articles disponibles</a></li>
+		  <li> <a href="order.jsp">Consulter votre commande</a></li>
 	  </ul>
   </p>
   
