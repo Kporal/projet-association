@@ -40,11 +40,8 @@ public class CountryPersistenceTest extends TestCase {
 		service = PersistenceServiceProvider
 				.getService(CountryPersistence.class);
 		mock = new CountryMock();
-		countryTest = service.load(0);
-		if (countryTest == null) {
-			countryTest = mock.createInstance(0);
-			service.insert(countryTest);
-		}
+		countryTest = mock.createInstance(374);
+		service.insert(countryTest);
 	}
 
 	/**
@@ -57,12 +54,7 @@ public class CountryPersistenceTest extends TestCase {
 	 */
 	@After
 	public void tearDown() throws Exception {
-		if (service.load(0) != null) {
-			service.delete(0);
-		}
-		if (service.load(1) != null) {
-			service.delete(1);
-		}
+		service.delete(countryTest);
 	}
 
 	@Test
@@ -70,11 +62,11 @@ public class CountryPersistenceTest extends TestCase {
 		System.out.println(" ----- ");
 		System.out.println(" Test insert : ");
 
-		Country country = mock.createInstance(1);
+		Country country = mock.createInstance(375);
 		service.insert(country);
-		Country countryLoad = service.load(1);
+		Country countryLoad = service.load(375);
 		Assert.assertEquals(country.toString(), countryLoad.toString());
-		service.delete(1);
+		service.delete(country);
 	}
 
 	@Test
@@ -82,7 +74,7 @@ public class CountryPersistenceTest extends TestCase {
 		System.out.println(" ----- ");
 		System.out.println(" Test load : ");
 
-		Country countryLoad = service.load(0);
+		Country countryLoad = service.load(374);
 		Assert.assertEquals(countryTest.toString(), countryLoad.toString());
 	}
 

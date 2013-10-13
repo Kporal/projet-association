@@ -37,11 +37,6 @@ public class ItemPersistenceTest extends TestCase{
 	public void setUp() throws Exception {
 		service = PersistenceServiceProvider.getService(ItemPersistence.class);
 		mock = new ItemMock();
-		itemTest = service.load(0);
-		if (itemTest == null){
-			itemTest = mock.createInstance(0) ;
-			service.insert(itemTest);
-		}
 	}
 
 	/**

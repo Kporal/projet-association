@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -98,16 +99,11 @@
 					<div class="col-md-3">
 						<select class="form-control" id="input-country" name="country"
 							title="pays">
-							
-							<option>test attribut : <%= request.getAttribute("country") %></option>
-							
 								<c:forEach var="pays" items="${country}"> 
 									<option value="<c:out value="${pays.id}"/>">
-										test EL : <c:out value="${pays.name}"/>
+										<c:out value="${pays.name}"/>
 									</option>
 								</c:forEach>
-								
-								
 						</select>
 					</div>
 				</div>
@@ -115,7 +111,7 @@
 				<div class="row">
 					<div class="col-md-3 col-md-offset-2">
 						<button type="button" class="btn btn-primary">S'enregistrer</button>
-						<a href="signin" class="btn btn-danger">Annulez</a>
+						<a href="signin" class="btn btn-danger">Annuler</a>
 					</div>
 				</div>
 

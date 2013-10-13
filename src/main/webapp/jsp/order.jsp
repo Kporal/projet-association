@@ -39,8 +39,8 @@
 				</tr>
 			</table>
 			
-			<a href="#" title="Annulez la commande">
-				<span class="glyphicon glyphicon-remove red"></span> Annulez la commande
+			<a href="#" title="Annuler la commande">
+				<span class="glyphicon glyphicon-remove red"></span> Annuler la commande
 			</a>
 			
 		</div><!-- /well -->

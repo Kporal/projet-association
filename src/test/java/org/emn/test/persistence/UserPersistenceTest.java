@@ -28,6 +28,7 @@ public class UserPersistenceTest extends TestCase {
 	
 	private UserPersistence service;
 	private UserMock mock;
+	private User userTest;
 	
 	/**
 	 * <p>Code exécuté avant les tests.</p>

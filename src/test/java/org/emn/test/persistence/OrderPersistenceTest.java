@@ -28,6 +28,7 @@ public class OrderPersistenceTest extends TestCase {
 
 	private OrderPersistence service;
 	private OrderMock mock;
+	private Order orderTest;
 
 	/**
 	 * <p>Code exécuté avant les tests.</p>
