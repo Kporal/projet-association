@@ -1,10 +1,16 @@
 package org.emn.servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.emn.bean.Country;
+import org.emn.persistence.services.fake.CountryPersistenceFAKE;
+import org.emn.persistence.services.jpa.CountryPersistenceJPA;
 
 /**
  * Servlet implementation class Register
@@ -24,6 +30,10 @@ public class Register extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		CountryPersistenceJPA ip = new CountryPersistenceJPA();
+		List<Country> listCountry = ip.loadAll();
+		request.setAttribute("country", listCountry);
+		System.out.println(request.getAttribute("country"));
 		getServletContext().getRequestDispatcher("/jsp/register.jsp").forward(request, response);
 	}
 
