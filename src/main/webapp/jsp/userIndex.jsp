@@ -10,14 +10,17 @@
 	
   	<jsp:include page="template/navbar.jspf"></jsp:include>
 	
+	<br>
 	<div class="container">
-  <h2>Bienvenue sur Bazaar, le site des adhérents de l'association.</h2>
-  <p>
-	  <ul>
-		  <li> <a href="items.jsp">Consulter la liste des articles disponibles</a></li>
-		  <li> <a href="order.jsp">Consulter votre commande</a></li>
-	  </ul>
-  </p>
+		<div class="well">
+		
+		  <h2>Bienvenue sur Bazaar, le site des adhérents de l'association.</h2>
+		  <ul>
+			  <li><a href="items">Consulter la liste des articles disponibles</a></li>
+			  <li><a href="order">Consulter votre commande</a></li>
+		  </ul>
+		  
+		</div>
   
   	</div><!-- /container -->
   

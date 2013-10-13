@@ -7,14 +7,14 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="userIndex.jsp">Bazaar</a>
+    <a class="navbar-brand" href="home">Bazaar</a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav">
-      <li><a href="items.jsp"><span class="glyphicon glyphicon-list"></span> Article</a></li>
-      <li><a href="order.jsp"><span class="glyphicon glyphicon-shopping-cart"></span> Commande</a></li>
+      <li><a href="items"><span class="glyphicon glyphicon-list"></span> Article</a></li>
+      <li><a href="order"><span class="glyphicon glyphicon-shopping-cart"></span> Commande</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li>

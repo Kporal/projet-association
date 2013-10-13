@@ -1,8 +1,5 @@
 /**
- * 
- */
-/**
  * @author Utilisateur
  *
  */
-package bean;
+package org.emn.servlet;

@@ -6,7 +6,7 @@
     <title>Connexion</title>
     <jsp:include page="template/header.jspf" flush="true"/>
     <!-- Style -->
-    <link href="../ressources/css/signin.css" rel="stylesheet" media="screen">
+    <link href="ressources/css/signin.css" rel="stylesheet" media="screen">
   </head>
   <body>
   
@@ -19,7 +19,7 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
         <span class="help-block">
 	      	Pas encore enregistrez ? 
-	      	<a href="register.jsp">Créez votre compte</a>
+	      	<a href="register">Créez votre compte</a>
 	    </span>
       </form>
 
