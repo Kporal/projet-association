@@ -4,67 +4,94 @@
  */
 package org.emn.test.persistence;
 
+import junit.framework.TestCase;
 
-import org.emn.bean.Country ;
+import org.emn.bean.Country;
 import org.emn.mock.CountryMock;
 import org.emn.persistence.PersistenceServiceProvider;
 import org.emn.persistence.services.CountryPersistence;
-
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * JUnit test case for Country persistence service
  * 
  * @author Telosys Tools Generator
- *
+ * 
  */
-public class CountryPersistenceTest 
-{
-	@Test
-	public void test1() {
-		
-		System.out.println("Test Country persistence : delete + load ..." );
-		
-		CountryPersistence service = PersistenceServiceProvider.getService(CountryPersistence.class);
-		
-		CountryMock mock = new CountryMock();
-		
-		// TODO : set primary key values here 
-		process( service, mock, 0  );
-		// process( service, mock, ... );
+public class CountryPersistenceTest extends TestCase {
+
+	private CountryPersistence service;
+	private CountryMock mock;
+	private Country countryTest;
+
+	/**
+	 * <p>
+	 * Code exécuté avant les tests.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 *             toute exception.
+	 */
+	@Before
+	public void setUp() throws Exception {
+		service = PersistenceServiceProvider
+				.getService(CountryPersistence.class);
+		mock = new CountryMock();
+		countryTest = service.load(0);
+		if (countryTest == null) {
+			countryTest = mock.createInstance(0);
+			service.insert(countryTest);
+		}
 	}
 
-	private void process(CountryPersistence service, CountryMock mock, int id ) {
-		System.out.println("----- "  );
-		System.out.println(" . load : " );
-		Country entity = service.load( id );
-		if ( entity != null ) {
-			// Found 
-			System.out.println("   FOUND : " + entity );
-			
-			// Save (update) with the same values to avoid database integrity errors  
-			System.out.println(" . save : " + entity );
-			service.save(entity);
-			System.out.println("   saved : " + entity );
+	/**
+	 * <p>
+	 * Code exécuté après les tests.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 *             toute exception.
+	 */
+	@After
+	public void tearDown() throws Exception {
+		if (service.load(0) != null) {
+			service.delete(0);
 		}
-		else {
-			// Not found 
-			System.out.println("   NOT FOUND" );
-			// Create a new instance 
-			entity = mock.createInstance( id ) ;
-			Assert.assertNotNull(entity);
+		if (service.load(1) != null) {
+			service.delete(1);
+		}
+	}
 
-			// No reference : insert is possible 
-			// Try to insert the new instance
-			System.out.println(" . insert : " + entity );
-			service.insert(entity);
-			System.out.println("   inserted : " + entity );
+	@Test
+	public void testInsertCountry() {
+		System.out.println(" ----- ");
+		System.out.println(" Test insert : ");
 
-			System.out.println(" . delete : " );
-			boolean deleted = service.delete( id );
-			System.out.println("   deleted = " + deleted);
-			Assert.assertTrue(deleted) ;
-		}		
+		Country country = mock.createInstance(1);
+		service.insert(country);
+		Country countryLoad = service.load(1);
+		Assert.assertEquals(country.toString(), countryLoad.toString());
+		service.delete(1);
+	}
+
+	@Test
+	public void testLoadCountry() {
+		System.out.println(" ----- ");
+		System.out.println(" Test load : ");
+
+		Country countryLoad = service.load(0);
+		Assert.assertEquals(countryTest.toString(), countryLoad.toString());
+	}
+
+	@Test
+	public void testDeleteCountry() {
+		System.out.println(" ----- ");
+		System.out.println(" Test delete : ");
+
+		boolean deleted = service.delete(countryTest);
+		Assert.assertTrue(deleted);
 	}
 }

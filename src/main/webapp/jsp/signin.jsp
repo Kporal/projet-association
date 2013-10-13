@@ -18,7 +18,7 @@
         <input type="password" class="form-control" placeholder="Mot de passe">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
         <span class="help-block">
-	      	Pas encore enregistrez ? 
+	      	Pas encore enregistré ? 
 	      	<a href="register">Créez votre compte</a>
 	    </span>
       </form>

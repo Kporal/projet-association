@@ -5,12 +5,17 @@
 package org.emn.test.persistence;
 
 
+import junit.framework.TestCase;
+
 import org.emn.bean.User ;
+import org.emn.mock.OrderMock;
 import org.emn.mock.UserMock;
 import org.emn.persistence.PersistenceServiceProvider;
+import org.emn.persistence.services.OrderPersistence;
 import org.emn.persistence.services.UserPersistence;
-
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -19,16 +24,33 @@ import org.junit.Test;
  * @author Telosys Tools Generator
  *
  */
-public class UserPersistenceTest 
-{
+public class UserPersistenceTest extends TestCase {
+	
+	private UserPersistence service;
+	private UserMock mock;
+	
+	/**
+	 * <p>Code exécuté avant les tests.</p>
+	 * @throws Exception toute exception.
+	 */
+	@Before
+	public void setUp() throws Exception {
+		service = PersistenceServiceProvider.getService(UserPersistence.class);
+		mock = new UserMock();
+	}
+
+	/**
+	 * <p>Code exécuté après les tests.</p>
+	 * @throws Exception toute exception.
+	 */
+	@After
+	public void tearDown() throws Exception {
+	}
+	
 	@Test
 	public void test1() {
 		
 		System.out.println("Test User persistence : delete + load ..." );
-		
-		UserPersistence service = PersistenceServiceProvider.getService(UserPersistence.class);
-		
-		UserMock mock = new UserMock();
 		
 		// TODO : set primary key values here 
 		process( service, mock, 0  );

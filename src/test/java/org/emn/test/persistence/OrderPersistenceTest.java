@@ -5,12 +5,17 @@
 package org.emn.test.persistence;
 
 
+import junit.framework.TestCase;
+
 import org.emn.bean.Order ;
+import org.emn.mock.ItemMock;
 import org.emn.mock.OrderMock;
 import org.emn.persistence.PersistenceServiceProvider;
+import org.emn.persistence.services.ItemPersistence;
 import org.emn.persistence.services.OrderPersistence;
-
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -19,17 +24,34 @@ import org.junit.Test;
  * @author Telosys Tools Generator
  *
  */
-public class OrderPersistenceTest 
-{
+public class OrderPersistenceTest extends TestCase {
+
+	private OrderPersistence service;
+	private OrderMock mock;
+
+	/**
+	 * <p>Code exécuté avant les tests.</p>
+	 * @throws Exception toute exception.
+	 */
+	@Before
+	public void setUp() throws Exception {
+		service = PersistenceServiceProvider.getService(OrderPersistence.class);
+		mock = new OrderMock();
+	}
+
+	/**
+	 * <p>Code exécuté après les tests.</p>
+	 * @throws Exception toute exception.
+	 */
+	@After
+	public void tearDown() throws Exception {
+	}
+
 	@Test
 	public void test1() {
-		
+
 		System.out.println("Test Order persistence : delete + load ..." );
-		
-		OrderPersistence service = PersistenceServiceProvider.getService(OrderPersistence.class);
-		
-		OrderMock mock = new OrderMock();
-		
+
 		// TODO : set primary key values here 
 		process( service, mock, 0 , 0  );
 		// process( service, mock, ... );
@@ -42,7 +64,7 @@ public class OrderPersistenceTest
 		if ( entity != null ) {
 			// Found 
 			System.out.println("   FOUND : " + entity );
-			
+
 			// Save (update) with the same values to avoid database integrity errors  
 			System.out.println(" . save : " + entity );
 			service.save(entity);
@@ -59,7 +81,7 @@ public class OrderPersistenceTest
 			System.out.println(" . insert : " + entity );
 			service.insert(entity);
 			System.out.println("   inserted : " + entity );
-			*/
+			 */
 
 			System.out.println(" . delete : " );
 			boolean deleted = service.delete( userId, articleId );
