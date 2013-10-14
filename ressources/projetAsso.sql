@@ -82,7 +82,7 @@ INSERT INTO PASSO.UTILISATEUR (ID, LOGIN, PASS, NOM, PRENOM, ADRESSE, CODE_POSTA
 VALUES (1,'lefeuvre','utile','mister','lu','12 rue de strasbourg','44000','NANTES',1);
 
 INSERT INTO PASSO.UTILISATEUR (ID, LOGIN, PASS, NOM, PRENOM, ADRESSE, CODE_POSTAL, VILLE, PAYS_ID)
-VALUES (2,'p'titheinz','ketchup','heinz','ketchup','56 Luisenstraﬂe','10115','BERLIN',3);
+VALUES (2,'ptitheinz','ketchup','heinz','ketchup','56 Luisenstraﬂe','10115','BERLIN',3);
 
 -- COMMANDE
 INSERT INTO PASSO.COMMANDE (ARTICLE_ID, USER_ID)
