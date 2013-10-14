@@ -20,7 +20,6 @@ import org.emn.persistence.services.jpa.UserPersistenceJPA;
  */
 public class SignIn extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private static final String signinErrorText = "Identifiant / Mot de passe incorrect";
     private static final String signinErrorPage = "/jsp/signin.jsp";
     private UserPersistence userDAO;
     
@@ -51,7 +50,7 @@ public class SignIn extends HttpServlet {
 		
 		if(login == null)
 		{
-			request.setAttribute("error", signinErrorText);
+			request.setAttribute("error", true);
 			request.getRequestDispatcher(signinErrorPage).forward(request, response);
 		}
 		else
@@ -61,7 +60,7 @@ public class SignIn extends HttpServlet {
 			if(result.size() != 1)
 			{
 				System.out.println("erreur1 : nb user = "+result.size());
-				request.setAttribute("error", signinErrorText);
+				request.setAttribute("error", true);
 				request.getRequestDispatcher(signinErrorPage).forward(request, response);
 			}
 			else
@@ -69,8 +68,8 @@ public class SignIn extends HttpServlet {
 				User user = result.get(0);
 				if(user.getPassword() != pass)
 				{
-					System.out.println("att :"+ user.getPassword());
-					request.setAttribute("error", signinErrorText);
+					System.out.println("att : "+ user.getPassword() + "  reçu : "+pass);
+					request.setAttribute("error", true);
 					request.getRequestDispatcher(signinErrorPage).forward(request, response);				
 				}
 				else

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -17,7 +18,7 @@
         <input type="text" name="login" class="form-control" placeholder="Identifiant" autofocus>
         <input type="password" name="pass" class="form-control" placeholder="Mot de passe">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
-        <span class="form-signin-error">${error}</span>
+        <c:if test='${error }'> <span class="form-signin-error">Identifiant / Mot de passe incorrect</span> </c:if>
         <span class="help-block">
 	      	Pas encore enregistré ? 
 	      	<a href="register">Créez votre compte</a>
