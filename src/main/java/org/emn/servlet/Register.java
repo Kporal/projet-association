@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.emn.bean.Country;
-import org.emn.persistence.services.fake.CountryPersistenceFAKE;
 import org.emn.persistence.services.jpa.CountryPersistenceJPA;
 
 /**

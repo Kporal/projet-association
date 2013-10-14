@@ -14,7 +14,7 @@
 	<div class="container">
 		<div class="well">
 		
-		  <h2>Bienvenue sur Bazaar, le site des adhérents de l'association.</h2>
+		  <h1>Bienvenue sur Bazaar, le site des adhérents de l'association.</h1>
 		  <ul>
 			  <li><a href="items">Consulter la liste des articles disponibles</a></li>
 			  <li><a href="order">Consulter votre commande</a></li>

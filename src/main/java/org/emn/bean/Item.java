@@ -123,6 +123,11 @@ public class Item implements Serializable {
 	public Integer getStock() {
 		return this.stock;
 	}
+	
+	public void stockRemove() {
+		if(this.stock >= 1)
+			this.stock -= 1;
+	}
 
 	// ----------------------------------------------------------------------
 	// GETTERS & SETTERS FOR LINKS
