@@ -50,20 +50,20 @@
 				</div>
 
 				<div class="form-group">
-					<label for="input-firstName" class="col-md-2 control-label">Nom</label>
+					<label for="input-firstName" class="col-md-2 control-label">Prénom</label>
 					<font color="red">*</font>
 					<div class="col-md-3">
 						<input type="text" name="firstName" id="input-firstName"
-							class="form-control" placeholder="nom" title="nom" required>
+							class="form-control" placeholder="prénom" title="prénom" required>
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label for="input-lastName" class="col-md-2 control-label">Prénom</label>
+					<label for="input-lastName" class="col-md-2 control-label">Nom</label>
 					<font color="red">*</font>
 					<div class="col-md-3">
 						<input type="text" name="lastName" id="input-lastName"
-							class="form-control" placeholder="prénom" title="prénom" required>
+							class="form-control" placeholder="nom" title="nom" required>
 					</div>
 				</div>
 
