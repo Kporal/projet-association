@@ -29,11 +29,9 @@ public class Register extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		CountryPersistenceJPA ip = new CountryPersistenceJPA();
-		List<Country> listCountry = ip.loadAll();
+		CountryPersistenceJPA jpa = new CountryPersistenceJPA();
+		List<Country> listCountry = jpa.loadAll();
 		request.setAttribute("country", listCountry);
-		System.out.println(request.getAttribute("country"));
 		getServletContext().getRequestDispatcher("/jsp/register.jsp").forward(request, response);
 	}
 

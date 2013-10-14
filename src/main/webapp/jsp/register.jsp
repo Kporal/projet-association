@@ -100,8 +100,8 @@
 						<select class="form-control" id="input-country" name="country"
 							title="pays">
 								<c:forEach var="pays" items="${country}"> 
-									<option value="<c:out value="${pays.id}"/>">
-										<c:out value="${pays.name}"/>
+									<option value="${pays.id}">
+										${pays.name}
 									</option>
 								</c:forEach>
 						</select>
