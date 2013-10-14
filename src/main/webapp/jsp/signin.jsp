@@ -12,11 +12,12 @@
   
     <div class="container">
 
-      <form class="form-signin">
+      <form method="post" class="form-signin">
       	<h2 class="form-signin-heading">Veuillez vous connecter</h2>
-        <input type="text" class="form-control" placeholder="Identifiant" autofocus>
-        <input type="password" class="form-control" placeholder="Mot de passe">
+        <input type="text" name="login" class="form-control" placeholder="Identifiant" autofocus>
+        <input type="password" name="pass" class="form-control" placeholder="Mot de passe">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
+        <span class="form-signin-error">${error}</span>
         <span class="help-block">
 	      	Pas encore enregistré ? 
 	      	<a href="register">Créez votre compte</a>
