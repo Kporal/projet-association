@@ -20,67 +20,63 @@ import org.emn.persistence.services.jpa.UserPersistenceJPA;
  */
 public class SignIn extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private static final String signinErrorPage = "/jsp/signin.jsp";
-    private UserPersistence userDAO;
-    
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SignIn() {
-        super();
-        userDAO = new UserPersistenceJPA();
-    }
+	private static final String signinErrorPage = "/jsp/signin.jsp";
+	private UserPersistence userDAO;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(request, response);
+	public SignIn() {
+		super();
+		userDAO = new UserPersistenceJPA();
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Map<String,Object> criteria = new HashMap<String,Object>();
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(
+				request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		Map<String, Object> criteria = new HashMap<String, Object>();
 		String login = request.getParameter("login");
 		criteria.put("login", login);
 		String pass = request.getParameter("pass");
-		
-		if(login == null)
-		{
+
+		if (login == null) {
 			request.setAttribute("error", true);
-			request.getRequestDispatcher(signinErrorPage).forward(request, response);
-		}
-		else
-		{
+			request.getRequestDispatcher(signinErrorPage).forward(request,
+					response);
+		} else {
 			List<User> result = userDAO.search(criteria);
-			System.out.println(login +" "+pass);
-			if(result.size() != 1)
-			{
-				System.out.println("erreur1 : nb user = "+result.size());
+			if (result.size() != 1) {
 				request.setAttribute("error", true);
-				request.getRequestDispatcher(signinErrorPage).forward(request, response);
-			}
-			else
-			{
+				request.getRequestDispatcher(signinErrorPage).forward(request,
+						response);
+			} else {
 				User user = result.get(0);
-				if(user.getPassword() != pass)
-				{
-					System.out.println("att : "+ user.getPassword() + "  reçu : "+pass);
+				if (!user.getPassword().equals(pass)) {
 					request.setAttribute("error", true);
-					request.getRequestDispatcher(signinErrorPage).forward(request, response);				
-				}
-				else
-				{
-					System.out.println("OK");
+					request.getRequestDispatcher(signinErrorPage).forward(
+							request, response);
+				} else {
 					HttpSession session = request.getSession();
 					session.setAttribute("userName", user.getLastName());
 					session.setAttribute("userFirstName", user.getFirstName());
 					session.setAttribute("userId", user.getId());
-					
-					request.getRequestDispatcher("/jsp/userIndex.jsp").forward(request, response);
+
+					request.getRequestDispatcher("/jsp/userIndex.jsp").forward(
+							request, response);
 				}
 			}
 		}
