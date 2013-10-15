@@ -39,7 +39,7 @@ public class Order implements Serializable {
 	// ----------------------------------------------------------------------
 	// ENTITY PRIMARY KEY ( EMBEDDED IN AN EXTERNAL CLASS )
 	// ----------------------------------------------------------------------
-	@Id
+	@EmbeddedId
 	private OrderKey compositePrimaryKey;
 
 	// ----------------------------------------------------------------------

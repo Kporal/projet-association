@@ -20,7 +20,7 @@ import org.emn.persistence.services.jpa.UserPersistenceJPA;
  */
 public class SignIn extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String signinErrorPage = "/jsp/signin.jsp";
+	private static final String signinPage = "/jsp/signin.jsp";
 	private UserPersistence userDAO;
 
 	/**
@@ -37,8 +37,7 @@ public class SignIn extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		getServletContext().getRequestDispatcher("/jsp/signin.jsp").forward(
+		getServletContext().getRequestDispatcher(signinPage).forward(
 				request, response);
 	}
 
@@ -55,28 +54,23 @@ public class SignIn extends HttpServlet {
 
 		if (login == null) {
 			request.setAttribute("error", true);
-			request.getRequestDispatcher(signinErrorPage).forward(request,
+			request.getRequestDispatcher(signinPage).forward(request,
 					response);
 		} else {
 			List<User> result = userDAO.search(criteria);
 			if (result.size() != 1) {
 				request.setAttribute("error", true);
-				request.getRequestDispatcher(signinErrorPage).forward(request,
-						response);
+				request.getRequestDispatcher(signinPage).forward(request,response);
 			} else {
 				User user = result.get(0);
 				if (!user.getPassword().equals(pass)) {
 					request.setAttribute("error", true);
-					request.getRequestDispatcher(signinErrorPage).forward(
-							request, response);
+					request.getRequestDispatcher(signinPage).forward(request, response);
 				} else {
 					HttpSession session = request.getSession();
-					session.setAttribute("userName", user.getLastName());
-					session.setAttribute("userFirstName", user.getFirstName());
-					session.setAttribute("userId", user.getId());
-
-					request.getRequestDispatcher("/jsp/userIndex.jsp").forward(
-							request, response);
+					session.setAttribute("user", user);
+					
+					response.sendRedirect("home");
 				}
 			}
 		}
