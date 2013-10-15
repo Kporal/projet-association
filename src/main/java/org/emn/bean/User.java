@@ -208,5 +208,4 @@ public class User implements Serializable {
 		sb.append(city);
 		return sb.toString();
 	}
-
 }

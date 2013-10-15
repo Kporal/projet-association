@@ -12,6 +12,7 @@ import java.io.Serializable;
 //import org.hibernate.validator.constraints.* ;
 
 import java.util.List;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -108,5 +109,4 @@ public class Country implements Serializable {
 		sb.append(name);
 		return sb.toString();
 	}
-
 }
