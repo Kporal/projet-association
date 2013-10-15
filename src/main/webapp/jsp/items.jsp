@@ -19,7 +19,7 @@
 			<div class="alert alert-${type}">
 				${msg}
 				<a href="order" class="alert-link">Consulter le panier</a>
-				<button type="button" class="close" aria-hidden="true">&times;</button>
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
 			</div>
 		</c:if>
 		
@@ -42,12 +42,9 @@
 						<td>${article.price}</td>
 						<td>${article.stock}</td>
 						<td>
-							<form action="items" method="POST">
-								<input type="hidden" name="id" value="${article.id}">
-								<button type="submit" class="btn btn-success" title="Commander">
-									<span class="glyphicon glyphicon-ok"></span>
-								</button>
-							</form>
+							<a href="items?id=${article.id}" class="btn btn-success" title="Commander">
+								<span class="glyphicon glyphicon-ok"></span>
+							</a>
 						</td>
 					</tr>
 				</c:forEach>
