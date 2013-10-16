@@ -49,7 +49,7 @@ public class OrderPersistenceTest extends TestCase {
 	}
 
 	@Test
-	public void test1() {
+	public void testLoadDeleteOrder() {
 
 		System.out.println("Test Order persistence : delete + load ..." );
 

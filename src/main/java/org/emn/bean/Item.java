@@ -160,5 +160,4 @@ public class Item implements Serializable {
 		sb.append(stock);
 		return sb.toString();
 	}
-
 }

@@ -25,7 +25,7 @@
 		
 		<div class="well">
 
-			<h1>Catalogue des articles</h1>
+			<h1>Catalogue des articles <small><span class="glyphicon glyphicon-list"></span></small></h1>
 
 			<table class="table table-hover table-bordered table-striped">
 				<tr>

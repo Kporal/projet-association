@@ -9,9 +9,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.emn.bean.Item;
 import org.emn.bean.Order;
+import org.emn.bean.User;
 import org.emn.persistence.services.jpa.ItemPersistenceJPA;
 
 /**
@@ -19,8 +21,11 @@ import org.emn.persistence.services.jpa.ItemPersistenceJPA;
  */
 public class Items extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String jsp = "/jsp/items.jsp";
+	private static final String attrType = "type";
+	private static final String attrMsg = "msg";
 	private ItemPersistenceJPA itemPersistance;
-	
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -37,22 +42,25 @@ public class Items extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
 			// si j'ajoute un article dans le panier
-			if(request.getParameter("id") != null) {
-				Map<String, String> res = addItemIntoCart(Integer.valueOf(request.getParameter("id")));
-				request.setAttribute("type", res.get("type"));
-				request.setAttribute("msg", res.get("msg"));
+			if (request.getParameter("id") != null) {
+				Map<String, String> res = addItemIntoCart(
+						Integer.valueOf(request.getParameter("id")),
+						request.getSession());
+				request.setAttribute(attrType, res.get(attrType));
+				request.setAttribute(attrMsg, res.get(attrMsg));
 			}
-			
+
 			// chargement de tous les articles
 			List<Item> items = itemPersistance.loadAll();
 			request.setAttribute("items", items);
 		} catch (Exception e) {
-			request.setAttribute("type", "danger");
-			request.setAttribute("msg", "Une erreur est survenue lors de la récupération des articles !");
+			request.setAttribute(attrType, "danger");
+			request.setAttribute(attrMsg,
+					"Une erreur est survenue lors de la récupération des articles !");
 		}
-		
-		getServletContext().getRequestDispatcher("/jsp/items.jsp").forward(request, response);
-		
+
+		getServletContext().getRequestDispatcher(jsp)
+				.forward(request, response);
 	}
 
 	/**
@@ -61,42 +69,53 @@ public class Items extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		getServletContext().getRequestDispatcher("/jsp/items.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher(jsp)
+				.forward(request, response);
 	}
-	
+
 	/**
 	 * Permet d'ajouter un article dans le panier
+	 * 
 	 * @param id
-	 * @return List("type", "msg")
+	 * @return List("type", attrMsg)
 	 */
-	private Map<String, String> addItemIntoCart(int id) {
+	private Map<String, String> addItemIntoCart(int id, HttpSession cart) {
 		Map<String, String> res = new HashMap<String, String>();
 		// récupération de l'article
 		Item item = itemPersistance.load(id);
 		// si le stock d'articles est suffisant
-		if(item.stockRemove()) {
-			// si l'article est déjà ajouté dans le panier
-			//if(item.getListOfUser().contains(o))
-			if(item.getStock() >= 1) {
+		if (item.stockRemove()) {
+			// si l'article est déjà ajouté dans le panier de l'utilisateur
+			User user = (User) cart.getAttribute("user");
+			if (user != null
+					&& (user.getListOfItem() == null || !user.getListOfItem().contains(item))) {
 				// insertion de la commande
-				Order order = new Order();
+				Order order = (Order) cart.getAttribute("order");
+				// s'il n'existe pas de commande en cours
+				if (order == null) {
+					order = new Order();
+				}
 				order.setArticleId(item.getId());
-				order.setUserId(1);
-				res.put("type", "success");
-				res.put("msg", "Félicitation, le produit "
-						+ item.getName()
+				order.setUserId(user.getId());
+				
+				user.getListOfItem().add(item);
+				item.getListOfUser().add(user);
+				cart.setAttribute("order", order);
+
+				res.put(attrType, "success");
+				res.put(attrMsg, "Félicitation, le produit " + item.getName()
 						+ " a bien été ajouté au panier !");
 			} else { // produit déjà ajouté
-				res.put("type", "warning");
-				res.put("msg", "Le produit "
-						+ item.getName()
+				res.put(attrType, "warning");
+				res.put(attrMsg, "Le produit " + item.getName()
 						+ " à déjà été ajouté dans le panier !");
 			}
 		} else { // stock insufisant
-			res.put("type", "danger");
-			res.put("msg", "Erreur, le produit "
-					+ item.getName()
-					+ " n'a pas été ajouté au panier, le stock est insuffisant !");
+			res.put(attrType, "danger");
+			res.put(attrMsg,
+					"Erreur, le produit "
+							+ item.getName()
+							+ " n'a pas été ajouté au panier, le stock est insuffisant !");
 		}
 		return res;
 	}

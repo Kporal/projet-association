@@ -9,8 +9,10 @@ import junit.framework.TestCase;
 
 import org.emn.bean.Country;
 import org.emn.bean.Item ;
+import org.emn.mock.CountryMock;
 import org.emn.mock.ItemMock;
 import org.emn.persistence.PersistenceServiceProvider;
+import org.emn.persistence.services.CountryPersistence;
 import org.emn.persistence.services.ItemPersistence;
 import org.junit.After;
 import org.junit.Assert;
@@ -30,8 +32,12 @@ public class ItemPersistenceTest extends TestCase{
 	private Item itemTest;
 
 	/**
-	 * <p>Code exécuté avant les tests.</p>
-	 * @throws Exception toute exception.
+	 * <p>
+	 * Code exï¿½cutï¿½ avant les tests.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 *             toute exception.
 	 */
 	@Before
 	public void setUp() throws Exception {
@@ -40,55 +46,18 @@ public class ItemPersistenceTest extends TestCase{
 	}
 
 	/**
-	 * <p>Code exécuté après les tests.</p>
-	 * @throws Exception toute exception.
+	 * <p>
+	 * Code exï¿½cutï¿½ aprï¿½s les tests.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 *             toute exception.
 	 */
 	@After
 	public void tearDown() throws Exception {
 	}
 
 	@Test
-	public void testInsertItem(){
-	}		
-
-	@Test
-	public void testLoadItem(){
-	}
-
-	@Test
-	public void testDeleteItem(){
-	}
-
-	private void process(ItemPersistence service, ItemMock mock, int id ) {
-		System.out.println("----- "  );
-		System.out.println(" . load : " );
-		Item entity = service.load( id );
-		if ( entity != null ) {
-			// Found 
-			System.out.println("   FOUND : " + entity );
-
-			// Save (update) with the same values to avoid database integrity errors  
-			System.out.println(" . save : " + entity );
-			service.save(entity);
-			System.out.println("   saved : " + entity );
-		}
-		else {
-			// Not found 
-			System.out.println("   NOT FOUND" );
-			// Create a new instance 
-			entity = mock.createInstance( id ) ;
-			Assert.assertNotNull(entity);
-
-			// No reference : insert is possible 
-			// Try to insert the new instance
-			System.out.println(" . insert : " + entity );
-			service.insert(entity);
-			System.out.println("   inserted : " + entity );
-
-			System.out.println(" . delete : " );
-			boolean deleted = service.delete( id );
-			System.out.println("   deleted = " + deleted);
-			Assert.assertTrue(deleted) ;
-		}		
+	public void test1() {
 	}
 }

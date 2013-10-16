@@ -31,7 +31,7 @@
 	<servlet>
 		<servlet-name>Home</servlet-name>
 		<display-name>Home</display-name>
-		<description></description>
+		<description>Page d'accueil</description>
 		<servlet-class>org.emn.servlet.Home</servlet-class>
 	</servlet>
 	<servlet-mapping>

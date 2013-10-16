@@ -8,6 +8,7 @@ import junit.framework.TestCase;
 
 import org.emn.bean.Country;
 import org.emn.mock.CountryMock;
+import org.emn.persistence.PersistenceConfig;
 import org.emn.persistence.PersistenceServiceProvider;
 import org.emn.persistence.services.CountryPersistence;
 import org.junit.After;
@@ -29,7 +30,7 @@ public class CountryPersistenceTest extends TestCase {
 
 	/**
 	 * <p>
-	 * Code exécuté avant les tests.
+	 * Code exï¿½cutï¿½ avant les tests.
 	 * </p>
 	 * 
 	 * @throws Exception
@@ -37,16 +38,15 @@ public class CountryPersistenceTest extends TestCase {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		service = PersistenceServiceProvider
-				.getService(CountryPersistence.class);
+		service = PersistenceServiceProvider.getService(CountryPersistence.class);
 		mock = new CountryMock();
-		countryTest = mock.createInstance(374);
+		countryTest = mock.createInstance(999999);
 		service.insert(countryTest);
 	}
 
 	/**
 	 * <p>
-	 * Code exécuté après les tests.
+	 * Code exï¿½cutï¿½ aprï¿½s les tests.
 	 * </p>
 	 * 
 	 * @throws Exception
@@ -55,35 +55,38 @@ public class CountryPersistenceTest extends TestCase {
 	@After
 	public void tearDown() throws Exception {
 		service.delete(countryTest);
+		service.delete(9999991);
 	}
 
 	@Test
 	public void testInsertCountry() {
-		System.out.println(" ----- ");
-		System.out.println(" Test insert : ");
+		System.out.println(" -> Test insert : ");
 
-		Country country = mock.createInstance(375);
+		// Insertion d'un nouveau pays en base
+		Country country = mock.createInstance(9999991);
 		service.insert(country);
-		Country countryLoad = service.load(375);
+		
+		// Chargement du pays en base avec le même ID
+		Country countryLoad = service.load(9999991);
 		Assert.assertEquals(country.toString(), countryLoad.toString());
-		service.delete(country);
+		System.out.println(" ----- ");
 	}
 
 	@Test
 	public void testLoadCountry() {
-		System.out.println(" ----- ");
-		System.out.println(" Test load : ");
+		System.out.println(" -> Test load : ");
 
-		Country countryLoad = service.load(374);
+		Country countryLoad = service.load(999999);
 		Assert.assertEquals(countryTest.toString(), countryLoad.toString());
+		System.out.println(" ----- ");
 	}
 
 	@Test
 	public void testDeleteCountry() {
-		System.out.println(" ----- ");
-		System.out.println(" Test delete : ");
+		System.out.println(" -> Test delete : ");
 
 		boolean deleted = service.delete(countryTest);
 		Assert.assertTrue(deleted);
+		System.out.println(" ----- ");
 	}
 }

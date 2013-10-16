@@ -7,6 +7,7 @@ package org.emn.test.persistence;
 
 import junit.framework.TestCase;
 
+import org.emn.bean.Country;
 import org.emn.bean.User ;
 import org.emn.mock.OrderMock;
 import org.emn.mock.UserMock;
@@ -31,7 +32,7 @@ public class UserPersistenceTest extends TestCase {
 	private User userTest;
 	
 	/**
-	 * <p>Code exécuté avant les tests.</p>
+	 * <p>Code exï¿½cutï¿½ avant les tests.</p>
 	 * @throws Exception toute exception.
 	 */
 	@Before
@@ -41,15 +42,39 @@ public class UserPersistenceTest extends TestCase {
 	}
 
 	/**
-	 * <p>Code exécuté après les tests.</p>
+	 * <p>Code exï¿½cutï¿½ aprï¿½s les tests.</p>
 	 * @throws Exception toute exception.
 	 */
 	@After
 	public void tearDown() throws Exception {
 	}
 	
+	/*
 	@Test
-	public void test1() {
+	public void testInsereUser(){
+		Country country = new Country();
+		country.setId(999999);
+		country.setName("SOMEWHERE");
+		
+		User user = new User();
+		user.setId(999999);
+		user.setLogin("test");
+		user.setPassword("1234");
+		user.setLastName("MISTER");
+		user.setFirstName("TEST");
+		user.setAddress("A ROAD");
+		user.setCity("SOMEWHERE");
+		user.setZipCode("12345");
+		user.setCountry(country);
+		
+		service.insert(user);
+		boolean delete = service.delete(user);
+		Assert.assertTrue(delete);
+	}
+	*/
+	
+	@Test
+	public void testDeleteLoadUser() {
 		
 		System.out.println("Test User persistence : delete + load ..." );
 		
