@@ -29,16 +29,13 @@
 					<th>Nom</th>
 					<th>Prix</th>
 				</tr>
-				<tr>
-					<td>T1</td>
-					<td>T1</td>
-					<td>T1</td>
-				</tr>
-				<tr>
-					<td>T1</td>
-					<td>T1</td>
-					<td>T1</td>
-				</tr>
+				<c:forEach var="article" items="${listItem}"> 
+					<tr>
+						<td>${article.code}</td>
+						<td>${article.name}</td>
+						<td>${article.price}</td>
+					</tr>
+				</c:forEach>
 				<c:if test="${empty order}">
 					<tr>
 						<td colspan="5" align="center">

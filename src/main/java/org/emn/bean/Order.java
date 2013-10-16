@@ -84,7 +84,14 @@ public class Order implements Serializable {
 	// ----------------------------------------------------------------------
 	// GETTERS & SETTERS FOR LINKS
 	// ----------------------------------------------------------------------
+	public OrderKey getCompositePrimaryKey() {
+		return compositePrimaryKey;
+	}
 
+	public void setCompositePrimaryKey(OrderKey compositePrimaryKey) {
+		this.compositePrimaryKey = compositePrimaryKey;
+	}
+	
 	// ----------------------------------------------------------------------
 	// toString METHOD
 	// ----------------------------------------------------------------------

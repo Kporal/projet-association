@@ -25,6 +25,8 @@ public class OrderPersistenceJPA extends GenericJpaService<Order, OrderKey> impl
 		super(Order.class);
 	}
 
+	
+	
 	public Order load( int userId, int articleId ) {
 		// Build the composite key
 		OrderKey key = new OrderKey( userId, articleId );
