@@ -11,10 +11,10 @@
 		<servlet-class>org.emn.servlet.Items</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>Order</servlet-name>
-		<display-name>Order</display-name>
+		<servlet-name>OrderServlet</servlet-name>
+		<display-name>OrderServlet</display-name>
 		<description>Visualisation des commandes</description>
-		<servlet-class>org.emn.servlet.Order</servlet-class>
+		<servlet-class>org.emn.servlet.OrderServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>Register</servlet-name>
@@ -39,7 +39,7 @@
 		<url-pattern>/items</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>Order</servlet-name>
+		<servlet-name>OrderServlet</servlet-name>
 		<url-pattern>/order</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
