@@ -9,11 +9,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.emn.bean.User;
 import org.emn.persistence.services.UserPersistence;
 import org.emn.persistence.services.jpa.UserPersistenceJPA;
+import org.emn.utils.Utilities;
 
 /**
  * Servlet implementation class SignIn
@@ -70,13 +70,7 @@ public class SignIn extends HttpServlet {
 					request.getRequestDispatcher(signinErrorPage).forward(
 							request, response);
 				} else {
-					HttpSession session = request.getSession();
-					session.setAttribute("userName", user.getLastName());
-					session.setAttribute("userFirstName", user.getFirstName());
-					session.setAttribute("userId", user.getId());
-
-					request.getRequestDispatcher("/jsp/userIndex.jsp").forward(
-							request, response);
+					Utilities.userConnect(request, response, user);
 				}
 			}
 		}

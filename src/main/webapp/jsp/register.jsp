@@ -110,7 +110,7 @@
 
 				<div class="row">
 					<div class="col-md-3 col-md-offset-2">
-						<button type="button" class="btn btn-primary">S'enregistrer</button>
+						<button type="submit" class="btn btn-primary">S'enregistrer</button>
 						<a href="signin" class="btn btn-danger">Annuler</a>
 					</div>
 				</div>
