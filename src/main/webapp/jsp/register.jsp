@@ -14,7 +14,7 @@
 	<div class="container">
 
 		<div class="well">
-			<form class="form-horizontal" role="form" method="POST" action="#">
+			<form class="form-horizontal" role="form" method="POST" action="register">
 
 				<legend>Nouvelle inscription</legend>
 
@@ -110,7 +110,7 @@
 
 				<div class="row">
 					<div class="col-md-3 col-md-offset-2">
-						<button type="submit" class="btn btn-primary">S'enregistrer</button>
+						<input type="submit" class="btn btn-primary" value ="S'enregistrer">
 						<a href="signin" class="btn btn-danger">Annuler</a>
 					</div>
 				</div>
