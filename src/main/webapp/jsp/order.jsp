@@ -48,13 +48,19 @@
 				</c:if>
 			</table>
 			
-			<button class="btn btn-danger">
-				<span class="glyphicon glyphicon-remove"></span> Annuler la commande
-			</button>
+			<a href="order?action=annuler">
+				<button class="btn btn-danger">
+					<span class="glyphicon glyphicon-remove"></span> Annuler la commande
+				</button>
+			</a>
 			
-			<button class="btn btn-success pull-right">
-				<span class="glyphicon glyphicon-credit-card"></span> Valider la commande
-			</button>
+			<a href="order?action=valider">
+				<button class="btn btn-success pull-right">
+					<span class="glyphicon glyphicon-credit-card"></span> Valider la commande
+				</button>
+			</a>
+			
+			
 			
 		</div><!-- /well -->
 	</div><!-- /container -->

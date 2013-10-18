@@ -37,19 +37,37 @@ public class OrderServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		if (user != null) {
-			System.out.println(">>>"+user);
-			if (user.getListOfItem() != null){
+		String action = request.getParameter("action");
+
+		if (action != null){
+			if (action.equalsIgnoreCase("annuler")){
+				// Cas action == annuler
+				System.out.println(">> annuler");
+				User userold = (User) session.getAttribute("user");
+				userold.getListOfItem().clear();
+				session.setAttribute("user", userold);
+			}else if (action.equalsIgnoreCase("valider")){
+				// Cas action == valider
+				System.out.println(">> valider");
+				if ((user != null) && (user.getListOfItem() != null)) {
+					for (Item i : user.getListOfItem()){
+						Order order = new Order();
+						order.setArticleId(i.getId());
+						order.setUserId(user.getId());
+						orderDAO.insert(order);
+					}
+				}
+			}
+		} else{
+			// Cas action == null
+			System.out.println(">> autre");
+			if ((user != null) && (user.getListOfItem() != null))  {
 				System.out.println(">>>>"+user.getListOfItem());
 				request.setAttribute("listItem", user.getListOfItem());
-				getServletContext().getRequestDispatcher("/jsp/order.jsp").forward(request, response);
-			}else{
-				System.out.println(">>> Pas d'article dans user");
 			}
-		}else{
-			System.out.println(">>> Pas de session...");
-			response.sendRedirect("signin");
 		}
+		
+		getServletContext().getRequestDispatcher("/jsp/order.jsp").forward(request, response);
 	}
 
 	/**
@@ -58,24 +76,6 @@ public class OrderServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
-		// BOUTON Annuler commande (vider la liste OU SUPPRIMER SESSION ?)
-		HttpSession session = request.getSession();
-		if (session != null) {
-			User userold = (User) session.getAttribute("user");
-			userold.getListOfItem().clear();
-			session.setAttribute("user", userold);
-
-			// Bouton valider commande (méthode à valider)
-			User user = (User) session.getAttribute("user");
-			if (user != null) {
-				for (Item i : user.getListOfItem()){
-					Order order = new Order();
-					order.setArticleId(i.getId());
-					order.setUserId(user.getId());
-					orderDAO.insert(order);
-				}
-			}
-		}
+		// TODO
 	}
 }
