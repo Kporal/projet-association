@@ -36,16 +36,19 @@ public class OrderServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if (session != null) {
-			User user = (User) session.getAttribute("user");
-			if (user != null) {
-				System.out.println(">>>"+user);
-				//request.setAttribute("listItem", user.getListOfItem());
-				//getServletContext().getRequestDispatcher("/jsp/order.jsp").forward(request, response);
+		User user = (User) session.getAttribute("user");
+		if (user != null) {
+			System.out.println(">>>"+user);
+			if (user.getListOfItem() != null){
+				System.out.println(">>>>"+user.getListOfItem());
+				request.setAttribute("listItem", user.getListOfItem());
+				getServletContext().getRequestDispatcher("/jsp/order.jsp").forward(request, response);
 			}else{
-				System.out.println(">>> Pas de session...");
-				response.sendRedirect("signin");
+				System.out.println(">>> Pas d'article dans user");
 			}
+		}else{
+			System.out.println(">>> Pas de session...");
+			response.sendRedirect("signin");
 		}
 	}
 
@@ -67,10 +70,9 @@ public class OrderServlet extends HttpServlet {
 			User user = (User) session.getAttribute("user");
 			if (user != null) {
 				for (Item i : user.getListOfItem()){
-					// Y'a un bug là... Pas trop d'idée...
-					OrderKey orderkey = new OrderKey(user.getId(), i.getId());
 					Order order = new Order();
-					order.setCompositePrimaryKey(orderkey);
+					order.setArticleId(i.getId());
+					order.setUserId(user.getId());
 					orderDAO.insert(order);
 				}
 			}

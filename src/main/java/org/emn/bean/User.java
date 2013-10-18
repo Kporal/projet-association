@@ -79,7 +79,7 @@ public class User implements Serializable {
 	@JoinColumn(name = "PAYS_ID", referencedColumnName = "ID", insertable = false, updatable = false)
 	private Country country;
 
-	@ManyToMany(mappedBy = "listOfUser", targetEntity = Item.class)
+	@ManyToMany(mappedBy = "listOfUser", targetEntity = Item.class, fetch = FetchType.EAGER)
 	private List<Item> listOfItem;
 
 	// ----------------------------------------------------------------------

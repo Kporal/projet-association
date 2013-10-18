@@ -64,7 +64,7 @@ public class Item implements Serializable {
 	// ENTITY LINKS ( RELATIONSHIP )
 	// ----------------------------------------------------------------------
 	@ManyToMany(targetEntity = User.class)
-	@JoinTable(name = "COMMANDE", joinColumns = @JoinColumn(name = "ARTICLE_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"))
+	@JoinTable(name = "COMMANDE", schema = "PASSO", joinColumns = @JoinColumn(name = "ARTICLE_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"))
 	private List<User> listOfUser;
 
 	// ----------------------------------------------------------------------
