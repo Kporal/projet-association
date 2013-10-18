@@ -9,7 +9,7 @@
   </head>
   <body>
 	
-  	<jsp:include page="template/navbar.jspf"></jsp:include>
+  	<jsp:include page="template/navbar.jsp"></jsp:include>
 	
 	<br>
 	<div class="container">

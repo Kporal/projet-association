@@ -12,6 +12,7 @@ import java.io.Serializable;
 //import org.hibernate.validator.constraints.* ;
 
 import java.util.List;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -63,7 +64,7 @@ public class Item implements Serializable {
 	// ----------------------------------------------------------------------
 	// ENTITY LINKS ( RELATIONSHIP )
 	// ----------------------------------------------------------------------
-	@ManyToMany(targetEntity = User.class)
+	@ManyToMany(targetEntity = User.class, fetch = FetchType.EAGER)
 	@JoinTable(name = "COMMANDE", schema = "PASSO", joinColumns = @JoinColumn(name = "ARTICLE_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"))
 	private List<User> listOfUser;
 

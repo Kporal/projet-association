@@ -21,7 +21,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li>
-      	<a href="#">Adherent : ${user.FirstName} ${user.LastName}<span class="glyphicon glyphicon-off" title="Se déconnecter"></span></a>
+      	<a href="#">Adherent : ${user.firstName} ${user.lastName} <span class="glyphicon glyphicon-off" title="Se déconnecter"></span></a>
       </li>
     </ul>
   </div><!-- /.navbar-collapse -->

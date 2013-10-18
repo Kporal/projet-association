@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.emn.bean.Item;
-import org.emn.bean.Order;
 import org.emn.bean.User;
 import org.emn.persistence.services.jpa.ItemPersistenceJPA;
 
@@ -89,19 +88,10 @@ public class Items extends HttpServlet {
 			User user = (User) cart.getAttribute("user");
 			if (user != null
 					&& (user.getListOfItem() == null || !user.getListOfItem().contains(item))) {
-				// insertion de la commande
-				Order order = (Order) cart.getAttribute("order");
-				// s'il n'existe pas de commande en cours
-				if (order == null) {
-					order = new Order();
-				}
-				order.setArticleId(item.getId());
-				order.setUserId(user.getId());
-				
+				// insertion de la commande				
 				user.getListOfItem().add(item);
 				item.getListOfUser().add(user);
-				cart.setAttribute("order", order);
-
+				
 				res.put(attrType, "success");
 				res.put(attrMsg, "Félicitation, le produit " + item.getName()
 						+ " a bien été ajouté au panier !");

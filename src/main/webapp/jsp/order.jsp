@@ -15,7 +15,7 @@
   </head>
   <body>
   	
-  	<jsp:include page="template/navbar.jspf"></jsp:include>
+  	<jsp:include page="template/navbar.jsp"></jsp:include>
   	
 	<br>
 	<div class="container">
@@ -29,14 +29,14 @@
 					<th>Nom</th>
 					<th>Prix</th>
 				</tr>
-				<c:forEach var="article" items="${listItem}"> 
+				<c:forEach var="article" items="${user.listOfItem}"> 
 					<tr>
 						<td>${article.code}</td>
 						<td>${article.name}</td>
 						<td>${article.price}</td>
 					</tr>
 				</c:forEach>
-				<c:if test="${empty order}">
+				<c:if test="${empty user.listOfItem}">
 					<tr>
 						<td colspan="5" align="center">
 							<em>Votre panier est actuellement vide</em><br>
