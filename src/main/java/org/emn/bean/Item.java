@@ -125,6 +125,11 @@ public class Item implements Serializable {
 		return this.stock;
 	}
 	
+	public boolean stockAdd() {
+		this.stock += 1;
+		return true;
+	}
+	
 	public boolean stockRemove() {
 		if(this.stock >= 1) {
 			this.stock -= 1;
