@@ -27,6 +27,7 @@ public class Utilities {
 				request, response);
 */
 		HttpSession session = request.getSession();
+		user.getListOfItem().clear();
 		session.setAttribute("user", user);
 		
 		response.sendRedirect("home");

@@ -93,19 +93,19 @@ public class Items extends HttpServlet {
 				item.getListOfUser().add(user);
 				
 				res.put(attrType, "success");
-				res.put(attrMsg, "Félicitation, le produit " + item.getName()
-						+ " a bien été ajouté au panier !");
+				res.put(attrMsg, "Félicitation, le produit \"" + item.getName()
+						+ "\" a bien été ajouté au panier !");
 			} else { // produit déjà ajouté
 				res.put(attrType, "warning");
-				res.put(attrMsg, "Le produit " + item.getName()
-						+ " à déjà été ajouté dans le panier !");
+				res.put(attrMsg, "Le produit \"" + item.getName()
+						+ "\" à déjà été ajouté dans le panier !");
 			}
 		} else { // stock insufisant
 			res.put(attrType, "danger");
 			res.put(attrMsg,
-					"Erreur, le produit "
+					"Erreur, le produit \""
 							+ item.getName()
-							+ " n'a pas été ajouté au panier, le stock est insuffisant !");
+							+ "\" n'a pas été ajouté au panier, le stock est insuffisant !");
 		}
 		return res;
 	}
