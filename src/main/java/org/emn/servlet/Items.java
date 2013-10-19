@@ -40,17 +40,26 @@ public class Items extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
+			List<Item> items = (List<Item>) request.getSession().getAttribute("items");
+			if(items == null) {
+				// chargement de tous les articles
+				items = itemPersistance.loadAll();
+				request.getSession().setAttribute("items", items);
+			}
 			User user = (User) request.getSession().getAttribute("user");
 			// si j'ajoute un article dans le panier
 			if (request.getParameter("id") != null) {
 				// récupération de l'article
-				Item item = itemPersistance.load(Integer.valueOf(request.getParameter("id")));
+				Item item = null;
+				for(Item i : items) {
+					if(i.getId() == Integer.valueOf(request.getParameter("id")))
+						item = i;
+				}
+				//Item item = itemPersistance.load(Integer.valueOf(request.getParameter("id")));
 				Map<String, String> res = addItemIntoCart(item, user);
 				request.setAttribute(attrType, res.get(attrType));
 				request.setAttribute(attrMsg, res.get(attrMsg));
 			}
-			// chargement de tous les articles
-			List<Item> items = itemPersistance.loadAll();
 			request.setAttribute("items", items);
 		} catch (Exception e) {
 			request.setAttribute(attrType, "danger");
