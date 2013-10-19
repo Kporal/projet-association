@@ -8,16 +8,23 @@ package org.emn.bean;
 
 import java.io.Serializable;
 
-//import javax.validation.constraints.* ;
-//import org.hibernate.validator.constraints.* ;
-
-import java.util.List;
-
-import javax.persistence.*;
+import javax.persistence.Cacheable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+//import javax.validation.constraints.* ;
+//import org.hibernate.validator.constraints.* ;
+import java.util.List;
 
 /**
  * Persistent class for entity stored in table "ARTICLE"
@@ -31,6 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
 // JAXB accessor = getter/setter pair
 @Entity
 @Table(name = "ARTICLE", schema = "PASSO")
+@Cacheable
 // Define named queries here
 // @NamedQueries ( {
 // @NamedQuery ( name="Item.query1", query="SELECT x FROM Item x WHERE  " ),
