@@ -37,6 +37,12 @@
 		<description>Page d'accueil</description>
 		<servlet-class>org.emn.servlet.Home</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>Disconnect</servlet-name>
+		<display-name>Disconnect</display-name>
+		<description>Servlet pour la déconnexion</description>
+		<servlet-class>org.emn.servlet.Disconnect</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>Items</servlet-name>
 		<url-pattern>/items</url-pattern>
@@ -56,6 +62,10 @@
 	<servlet-mapping>
 		<servlet-name>Home</servlet-name>
 		<url-pattern>/home</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Disconnect</servlet-name>
+		<url-pattern>/Disconnect</url-pattern>
 	</servlet-mapping>
 	<session-config>
 		<session-timeout>60</session-timeout>
