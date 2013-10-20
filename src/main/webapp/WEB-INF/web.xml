@@ -7,6 +7,24 @@
 		<welcome-file>signin</welcome-file>
 	</welcome-file-list>
 	<display-name>Projet site association pour JavaEE</display-name>
+	<filter>
+		<filter-name>SessionFilter</filter-name>
+		<display-name>SessionFilter</display-name>
+		<description>Vérifie que l'utilisateur est connecté</description>
+		<filter-class>org.emn.filter.SessionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>SessionFilter</filter-name>
+		<servlet-name>Home</servlet-name>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>SessionFilter</filter-name>
+		<servlet-name>Items</servlet-name>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>SessionFilter</filter-name>
+		<servlet-name>Order</servlet-name>
+	</filter-mapping>
 	<servlet>
 		<servlet-name>Items</servlet-name>
 		<display-name>Items</display-name>
