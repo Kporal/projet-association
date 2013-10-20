@@ -24,6 +24,9 @@ import org.emn.utils.Utilities;
 public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String registerErrorPage = "register";
+	private static final String errorDescription = "errorText";
+	private static final String errorStatus = "registerError";
+	
 	private UserPersistence userDAO;
 	private CountryPersistence countryDAO;
 
@@ -66,7 +69,8 @@ public class Register extends HttpServlet {
 				|| Utilities.checkAttribute(request.getParameter("firstName"))
 				|| Utilities.checkAttribute(request.getParameter("lastName"))) {
 			System.out.println("erreur champ obli");
-			request.setAttribute("error", true);
+			request.setAttribute(errorStatus, true);
+			request.setAttribute(errorDescription, "Champs obligatoire manquant");
 			
 			response.sendRedirect(registerErrorPage);
 		} else {
@@ -74,7 +78,8 @@ public class Register extends HttpServlet {
 			if (!request.getParameter("password").equals(request
 					.getParameter("passwordConfirm"))) {
 				System.out.println("erreur mdp match");
-				request.setAttribute("passNotMatch", true);
+				request.setAttribute(errorStatus, true);
+				request.setAttribute(errorDescription, "Les mots de passe ne sont pas identiques");
 
 				response.sendRedirect(registerErrorPage);
 			} else {
@@ -85,7 +90,8 @@ public class Register extends HttpServlet {
 				// Vérification de la disponibilité du login
 				if(!userDAO.search(criteria).isEmpty())
 				{
-					request.setAttribute("loginAlreadyUsed", true);
+					request.setAttribute(errorStatus, true);
+					request.setAttribute(errorDescription, "Identifiant déjà pris");
 					//request.getRequestDispatcher(registerErrorPage).forward(
 						//	request, response);
 					response.sendRedirect(registerErrorPage);
