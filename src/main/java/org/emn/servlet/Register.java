@@ -43,9 +43,10 @@ public class Register extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
+		// Remplissage de la liste des pays
 		List<Country> listCountry = countryDAO.loadAll();
 		request.setAttribute("country", listCountry);
-		System.out.println("countries got");
+		
 		getServletContext().getRequestDispatcher("/jsp/register.jsp").forward(
 				request, response);
 	}
@@ -56,16 +57,17 @@ public class Register extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
 		// Vérifie que les informations obligatoires sont renseignées
 		System.out.println("start register");
-		if (checkAttribute(request.getParameter("login"))
-				|| checkAttribute(request.getParameter("password"))
-				|| checkAttribute(request.getParameter("firstName"))
-				|| checkAttribute(request.getParameter("lastName"))) {
+		
+		if (Utilities.checkAttribute(request.getParameter("login"))
+				|| Utilities.checkAttribute(request.getParameter("password"))
+				|| Utilities.checkAttribute(request.getParameter("firstName"))
+				|| Utilities.checkAttribute(request.getParameter("lastName"))) {
 			System.out.println("erreur champ obli");
 			request.setAttribute("error", true);
-		//	request.getRequestDispatcher(registerErrorPage).forward(request,
-			//		response);
+			
 			response.sendRedirect(registerErrorPage);
 		} else {
 			// Vérifie que les mots de passe correspondent
@@ -73,25 +75,26 @@ public class Register extends HttpServlet {
 					.getParameter("passwordConfirm"))) {
 				System.out.println("erreur mdp match");
 				request.setAttribute("passNotMatch", true);
-//				request.getRequestDispatcher(registerErrorPage).forward(
-	//					request, response);
 
 				response.sendRedirect(registerErrorPage);
 			} else {
 				
 				Map<String,Object> criteria = new HashMap<String,Object>();
 				criteria.put("login", request.getParameter("login"));
+				
+				// Vérification de la disponibilité du login
 				if(!userDAO.search(criteria).isEmpty())
 				{
-					System.out.println("existe deja");
 					request.setAttribute("loginAlreadyUsed", true);
 					//request.getRequestDispatcher(registerErrorPage).forward(
 						//	request, response);
 					response.sendRedirect(registerErrorPage);
 				}
+				// Création du nouvel utilisateur
 				else
 				{
 					System.out.println("OK");
+					// Préparation de l'enregistrement
 					User user = new User();
 					user.setLogin((String)request.getParameter("login"));
 					user.setPassword((String)request.getParameter("password"));
@@ -108,17 +111,13 @@ public class Register extends HttpServlet {
 					
 					user.setZipCode((String)request.getParameter("zipCode"));
 					
+					// Enregistrement
 					userDAO.save(user);
 					
+					// Connexion
 					Utilities.userConnect(request, response, user);
 				}
 			}
 		}
 	}
-
-	private Boolean checkAttribute(Object attribute) {
-		String test = (String) attribute;
-		return test == null	|| test.trim().isEmpty();
-	}
-
 }

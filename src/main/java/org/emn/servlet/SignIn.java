@@ -52,17 +52,20 @@ public class SignIn extends HttpServlet {
 		criteria.put("login", login);
 		String pass = request.getParameter("pass");
 
-		if (login == null) {
+		// Si le login est invalide
+		if (Utilities.checkAttribute(login)) {
 			request.setAttribute("error", true);
 			request.getRequestDispatcher(signinPage).forward(request,
 					response);
 		} else {
 			List<User> result = userDAO.search(criteria);
+			// Si le login est inconnu
 			if (result.size() != 1) {
 				request.setAttribute("error", true);
 				request.getRequestDispatcher(signinPage).forward(request,response);
 			} else {
 				User user = result.get(0);
+				// Si le mot de passe est incorrect
 				if (!user.getPassword().equals(pass)) {
 					request.setAttribute("error", true);
 					request.getRequestDispatcher(signinPage).forward(request, response);
