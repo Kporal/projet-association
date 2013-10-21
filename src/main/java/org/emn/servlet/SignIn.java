@@ -21,6 +21,7 @@ import org.emn.utils.Utilities;
 public class SignIn extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String signinPage = "/jsp/signin.jsp";
+	private static final String textError = "textError";
 	private UserPersistence userDAO;
 
 	/**
@@ -37,8 +38,8 @@ public class SignIn extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		getServletContext().getRequestDispatcher(signinPage).forward(
-				request, response);
+		getServletContext().getRequestDispatcher(signinPage).forward(request,
+				response);
 	}
 
 	/**
@@ -47,32 +48,39 @@ public class SignIn extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		Map<String, Object> criteria = new HashMap<String, Object>();
-		String login = request.getParameter("login");
-		criteria.put("login", login);
-		String pass = request.getParameter("pass");
+		try {
+			Map<String, Object> criteria = new HashMap<String, Object>();
+			String login = request.getParameter("login");
+			criteria.put("login", login);
+			String pass = request.getParameter("pass");
 
-		// Si le login est invalide
-		if (Utilities.checkAttribute(login)) {
-			request.setAttribute("error", true);
-			request.getRequestDispatcher(signinPage).forward(request,
-					response);
-		} else {
-			List<User> result = userDAO.search(criteria);
-			// Si le login est inconnu
-			if (result.size() != 1) {
-				request.setAttribute("error", true);
-				request.getRequestDispatcher(signinPage).forward(request,response);
+			// Si le login est invalide
+			if (Utilities.checkAttribute(login)) {
+				request.setAttribute(textError, "Identifiant / Mot de passe incorrect");
+				request.getRequestDispatcher(signinPage).forward(request,
+						response);
 			} else {
-				User user = result.get(0);
-				// Si le mot de passe est incorrect
-				if (!user.getPassword().equals(pass)) {
-					request.setAttribute("error", true);
-					request.getRequestDispatcher(signinPage).forward(request, response);
+				List<User> result = userDAO.search(criteria);
+				// Si le login est inconnu
+				if (result.size() != 1) {
+					request.setAttribute(textError, "Identifiant / Mot de passe incorrect");
+					request.getRequestDispatcher(signinPage).forward(request,
+							response);
 				} else {
-					Utilities.userConnect(request, response, user);
+					User user = result.get(0);
+					// Si le mot de passe est incorrect
+					if (!user.getPassword().equals(pass)) {
+						request.setAttribute(textError, "Identifiant / Mot de passe incorrect");
+						request.getRequestDispatcher(signinPage).forward(
+								request, response);
+					} else {
+						Utilities.userConnect(request, response, user);
+					}
 				}
 			}
+		} catch (Exception e) {
+			request.setAttribute(textError, "Un problème est survenu lors de la connexion");
+			request.getRequestDispatcher(signinPage).forward(request, response);
 		}
 	}
 }
