@@ -17,9 +17,9 @@
 			<form class="form-horizontal" role="form" method="POST" action="register">
 
 				<legend>Nouvelle inscription</legend>
-<c:if test="${registerError}">
-	<span class="help-block"><font color="red">Erreur : ${errorText}</font></span>
-</c:if>
+				<c:if test="${!empty errorText}">
+					<span class="help-block"><font color="red">Erreur : ${errorText}</font></span>
+				</c:if>
 				<div class="form-group">
 					<label for="input-login" class="col-md-2 control-label">Identifiant</label>
 					<font color="red">*</font>

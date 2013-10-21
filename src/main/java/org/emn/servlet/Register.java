@@ -23,9 +23,8 @@ import org.emn.utils.Utilities;
  */
 public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String registerErrorPage = "register";
+	private static final String registerErrorPage = "/jsp/register.jsp";
 	private static final String errorDescription = "errorText";
-	private static final String errorStatus = "registerError";
 	
 	private UserPersistence userDAO;
 	private CountryPersistence countryDAO;
@@ -45,11 +44,8 @@ public class Register extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
-		// Remplissage de la liste des pays
-		List<Country> listCountry = countryDAO.loadAll();
-		request.setAttribute("country", listCountry);
 		
+		setCountries(request);
 		getServletContext().getRequestDispatcher("/jsp/register.jsp").forward(
 				request, response);
 	}
@@ -69,19 +65,13 @@ public class Register extends HttpServlet {
 				|| Utilities.checkAttribute(request.getParameter("firstName"))
 				|| Utilities.checkAttribute(request.getParameter("lastName"))) {
 			System.out.println("erreur champ obli");
-			request.setAttribute(errorStatus, true);
 			request.setAttribute(errorDescription, "Champs obligatoire manquant");
-			
-			response.sendRedirect(registerErrorPage);
 		} else {
 			// Vérifie que les mots de passe correspondent
 			if (!request.getParameter("password").equals(request
 					.getParameter("passwordConfirm"))) {
 				System.out.println("erreur mdp match");
-				request.setAttribute(errorStatus, true);
 				request.setAttribute(errorDescription, "Les mots de passe ne sont pas identiques");
-
-				response.sendRedirect(registerErrorPage);
 			} else {
 				
 				Map<String,Object> criteria = new HashMap<String,Object>();
@@ -90,11 +80,8 @@ public class Register extends HttpServlet {
 				// Vérification de la disponibilité du login
 				if(!userDAO.search(criteria).isEmpty())
 				{
-					request.setAttribute(errorStatus, true);
+					System.out.println("existe déjà");
 					request.setAttribute(errorDescription, "Identifiant déjà pris");
-					//request.getRequestDispatcher(registerErrorPage).forward(
-						//	request, response);
-					response.sendRedirect(registerErrorPage);
 				}
 				// Création du nouvel utilisateur
 				else
@@ -122,8 +109,22 @@ public class Register extends HttpServlet {
 					
 					// Connexion
 					Utilities.userConnect(request, response, user);
+					return;
 				}
 			}
 		}
+		if(request.getAttribute(errorDescription) != null)
+		{
+			setCountries(request);
+			getServletContext().getRequestDispatcher(registerErrorPage).forward(
+					request, response);
+		}
+	}
+	
+	private void setCountries(HttpServletRequest request)
+	{
+		// Remplissage de la liste des pays
+		List<Country> listCountry = countryDAO.loadAll();
+		request.setAttribute("country", listCountry);
 	}
 }
