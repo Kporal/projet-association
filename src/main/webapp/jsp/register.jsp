@@ -91,8 +91,8 @@
 				<div class="form-group">
 					<label for="input-city" class="col-md-2 control-label">Ville</label>
 					<div class="col-md-3">
-						<input type="text" name="city" id="input-city" maxlength="5"
-							class="form-control" placeholder="ville" title="ville">
+						<input type="text" name="city" id="input-city" class="form-control"
+							placeholder="ville" title="ville">
 					</div>
 				</div>
 
