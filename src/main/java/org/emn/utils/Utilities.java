@@ -23,7 +23,7 @@ public class Utilities {
 			HttpServletResponse response, User user) throws ServletException, IOException
 	{
 		HttpSession session = request.getSession();
-		user.getListOfItem().clear();
+		//user.getListOfItem().clear();
 		session.setAttribute("user", user);
 		
 		response.sendRedirect("home");

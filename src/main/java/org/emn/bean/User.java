@@ -12,6 +12,7 @@ import java.io.Serializable;
 //import org.hibernate.validator.constraints.* ;
 
 import java.util.List;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -42,6 +43,7 @@ public class User implements Serializable {
 	// ENTITY PRIMARY KEY ( BASED ON A SINGLE FIELD )
 	// ----------------------------------------------------------------------
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "ID", nullable = false)
 	private int id;
 
@@ -75,8 +77,10 @@ public class User implements Serializable {
 	// ----------------------------------------------------------------------
 	// ENTITY LINKS ( RELATIONSHIP )
 	// ----------------------------------------------------------------------
+	
 	@ManyToOne
-	@JoinColumn(name = "PAYS_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+	@JoinColumn(name = "PAYS_ID", referencedColumnName = "ID", nullable = false)
+	//@JoinColumn(name = "PAYS_ID", referencedColumnName = "ID", insertable = false, updatable = false)
 	private Country country;
 
 	@ManyToMany(mappedBy = "listOfUser", targetEntity = Item.class, fetch = FetchType.EAGER)
